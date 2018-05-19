@@ -29,8 +29,8 @@ class PayController extends Controller
     public function indexAction(Request $request)
     {
         $config = [
-            'id'=>'ASLk9Rt4q5BO4oavmGVWVb8QuHWeV61kJVKHqQvo69Z5_alGhG4C3huU5wj1pzE5zFG0yUi-jW8t7_m2',
-            'secret'=>'EOagxu224gORtm473EUwCclcmz6o-uKhGwmN5yqAMVbAqcdSjp9BmKaUx6AR2gaaS438c01z9Fe_1UkY',
+            'id'=>'your_id',
+            'secret'=>'your secrete key paypal',
         ];
 
         $session = $request->getSession();
