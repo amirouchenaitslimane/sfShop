@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block title %} Productos {% endblock %}
+{% block body %}
+    {% block slider %}{% endblock %}
+    <div class="col-sm-9 padding-right">
+        <div class="features_items"><!--features_items-->
+            <h2 class="title text-center">Productos </h2>
+
+            {% for product in pagination.items  %}
+                <div class="col-sm-4">
+                    <div class="product-image-wrapper">
+                        <div class="single-products">
+                            <div class="productinfo text-center">
+                                <img src="{{ asset('images/shop/') }}{{ product.Image.url }}" alt="{{ product.Image.alt }}" />
+                                <h2>{{ product.price }}</h2>
+                                <p>Easy Polo Black Edition</p>
+                                <a href="{{ path('am_express_cart_add', {'id': product.id}) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Añadir</a>
+                                <a href="{{ path('am_express_product_show', {'id': product.id}) }}" class="btn btn-default add-to-cart"><i class="fa fa-send"></i>Ver</a>
+
+                            </div>
+                        </div>
+                        <div class="choose">
+                            <ul class="nav nav-pills nav-justified">
+                                <li><a href=""><i class="fa fa-heart"></i>Añadir a lista deseos</a></li>
+                                 </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+
+
+
+    <div class="pagination">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+    </div>
+{% endblock %}

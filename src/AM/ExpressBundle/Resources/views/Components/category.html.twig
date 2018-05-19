@@ -1,0 +1,43 @@
+<div class="col-sm-3">
+    <div class="left-sidebar">
+        <h2>Categorías</h2>
+        <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+
+            {% for category in categories  %}
+            {% if category.parent is null %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordian" href="#aa-{{ category.id }}" >
+                                <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                {{ category.name }}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="aa-{{ category.id }}" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                {% for child in category.children %}
+                                    <li><a href="{{ path('am_express_category_show', {'id': child.id}) }}">{{ child.name }} </a></li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            {% endif %}
+            {% endfor %}
+
+
+
+
+
+
+
+
+
+        </div><!--/category-products-->
+    </div>
+</div>
+

@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+{% block title %} Home {% endblock %}
+{% block body %}
+    {% block slider %}{% endblock %}
+    {% block category %}{% endblock %}
+    {% block footer %}{% endblock %}
+
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }} alert-{{ type }}">
+                    <h4>{{ message }}</h4>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <section id="form"><!--form-->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm-4 col-sm-offset-1">
+    <div class="login-form">
+
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>
+{% endblock %}
+ {% block stylesheets %}
+     <style>
+         #form {
+             display: block;
+
+             margin-top: 10px;
+             overflow: hidden;
+         }
+
+         .login-form {
+
+         }
+
+         .signup-form {
+
+         }
+
+         .login-form h2, .signup-form h2 {
+             color: #696763;
+             font-family: 'Roboto', sans-serif;
+             font-size: 20px;
+             font-weight: 300;
+             margin-bottom: 30px;
+         }
+
+
+         .login-form form input, .signup-form form input {
+             background: #F0F0E9;
+             border: medium none;
+             color: #696763;
+             display: block;
+             font-family: 'Roboto', sans-serif;
+             font-size: 14px;
+             font-weight: 300;
+             height: 40px;
+             margin-bottom: 10px;
+             outline: medium none;
+             padding-left: 10px;
+             width: 100%;
+         }
+
+         .login-form form span{
+             line-height: 25px;
+         }
+
+         .login-form form span input {
+             width: 15px;
+             float: left;
+             height: 15px;
+             margin-right: 5px;
+         }
+
+         .login-form form button {
+             margin-top: 23px;
+         }
+
+         .login-form form button, .signup-form form button {
+             background: #1bc66e;;
+             border: medium none;
+             border-radius: 0;
+             color: #FFFFFF;
+             display: block;
+             font-family: 'Roboto', sans-serif;
+             padding: 6px 25px;
+         }
+
+         .login-form label{
+
+         }
+
+
+         .login-form label input {
+             border: medium none;
+             display: inline-block;
+             height: 0;
+             margin-bottom: 0;
+             outline: medium none;
+             padding-left: 0;
+         }
+
+     </style>
+ {% endblock %}

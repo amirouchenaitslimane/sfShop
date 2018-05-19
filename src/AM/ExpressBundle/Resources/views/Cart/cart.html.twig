@@ -1,0 +1,177 @@
+{% extends 'base.html.twig' %}
+{% block title %} Carrito {% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/msc-style.css') }}">
+
+{% endblock %}
+
+ {% block category %}{% endblock %}
+{% block slider %}{% endblock %}
+{% block body %}
+    {% set total_ht = 0 %}
+    {% set total = 0 %}
+    {% set all_total = 0 %}
+
+    {% if app.session.get('panier') is not empty %}
+    <section id="cart_items">
+        <div class="container">
+           <h1>Carrito</h1>
+
+            {% for label, messages in app.flashes(['success', 'danger']) %}
+                {% for message in messages %}
+                    <p class="alert alert-{{ label }}">
+                        {{ message }}
+                    </p>
+                {% endfor %}
+            {% endfor %}
+
+            <div class="table-responsive cart_info">
+
+                <table class="table table-condensed">
+                    <thead>
+                    <tr class="cart_menu">
+                        <td class="image">Producto</td>
+                        <td class="description"></td>
+                        <td class="price">Precio Unitario</td>
+                        <td class="quantity">Quantidad</td>
+                        <td class="total">Total</td>
+                        <td></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+        {% for product in products  %}
+            <tr id=#table-row-{{ product.id }}">
+                <td class="cart_product">
+                    <a href=""><img src="{{ asset('images/shop/') }}{{ product.Image.url }}" alt="{{ product.Image.alt }}" style="height: 100px;width: 100px;"></a>
+                </td>
+                <td class="cart_description">
+                    <h4><a href="{{ path('am_express_product_show', {'id': product.id}) }}">{{ product.Name }}</a></h4>
+                    <p>{{ product.description[:50] }}</p>
+                </td>
+                <td class="cart_price">
+                    <p>{{ product.price }} €</p>
+                </td>
+                <form action="{{ path('am_express_update')}}" method="post" id="myform-{{ product.id }}" class="form-inline">
+
+                <td class="cart_quantity">
+                    <div class="cart_quantity_button">
+
+                        <input type="number" class="cart_quantity_input" id="qty-{{ product.id }}" name="qty" min="1" max="10" value="{{ app.session.get('panier')[product.id] }}" onchange='update("{{ product.id }}")'>
+                        <span class="err-{{ product.id }}"></span>
+
+                        <input type="hidden" name="obj" value="{{ product.id }}" id="obj-{{ product.id }}">
+                    </div>
+                </td>
+                </form>
+                <td class="cart_total">
+                    <p class="cart_total_price">{{ product.price * app.session.get('panier')[product.id]  }} €  </p>
+                </td>
+                <td class="cart_delete">
+                    <button class="btn btn-mini btn-danger" type="button" onclick='deleteRecord({{ product.id }},"{{ path('am_express_cart_delete')}}")'><i class="fa fa-times"></i></button>
+
+                    {#<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>#}
+                </td>
+            </tr>
+
+            {%   set total_ht = total_ht + product.price * app.session.get('panier')[product.id] %}
+            {% set total = total + (product.price * app.session.get('panier')[product.id]  * 0.21)  %}
+
+        {% endfor %}
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section> <!--/#cart_items-->
+    <section id="do_action">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="total_area">
+                        <ul>
+                            <li>Total sin IVA <span>{{ total_ht  }}</span></li>
+                            <li>IVA <span>{{ total }}</span></li>
+                            <li>Gasto de envío <span>5.5</span></li>
+                            <li>Total a pagar  <span>{{ total + total_ht + 5.5 }}</span></li>
+                             {% set all_total = total + total_ht + 5.5  %}
+
+                        </ul>
+                        <a class="btn btn-default update" href="{{  path('am_express_product') }}">Comprar Más</a>
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <a class="btn btn-default check_out" href="{{ path('am_express_pay', {'amount': all_total }) }}">Realizar Pedido</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        {% else %}
+        <h3>Carrito vacio </h3>
+        {% endif %}
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/msc-script.js') }}"></script>
+    <script type="text/javascript">
+        function deleteRecord(id,link){
+
+
+            var r = confirm("Segur quieres eliminae el producto ?!");
+            if(r === true){
+                $.ajax({
+                    url: link,
+                    type: "POST",
+                    data:'id='+id,
+                    success: function(data){
+                        $("#table-row-"+id).fadeOut("slow" );
+                        location.reload();
+                    }
+                });
+
+            }
+
+
+
+
+        }
+        function update(id) {
+         var l =    $("input[name=qty]").val();
+         var bool = true;
+            var qty = parseInt(l);
+            var f = $("#myform-"+id).serialize();
+            var link = $("#myform-"+id).attr('action');
+            if(qty < 1 ){
+               var err = $(".err-"+id);
+               err.html('no se pude')
+                bool = false;
+            }
+
+
+            console.log(bool)
+           if(bool){
+                $.ajax({
+                    url: link,
+                    type: "POST",
+                    data:f,
+                    success: function(data){
+                        location.reload();
+                    }
+                });
+            }
+
+
+
+
+
+
+
+
+        }
+    </script>
+
+{% endblock %}

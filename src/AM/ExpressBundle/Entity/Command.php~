@@ -1,0 +1,67 @@
+<?php
+
+namespace AM\ExpressBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Command
+ *
+ * @ORM\Table(name="command")
+ * @ORM\Entity(repositoryClass="AM\ExpressBundle\Repository\CommandRepository")
+ */
+class Command
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AM\UserBundle\Entity\User", inversedBy="commande")
+     * @ORM\JoinColumn(nullable=true)
+     */
+
+    private $user;
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="valider", type="boolean")
+     */
+    private $valider;
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="reference", type="integer")
+     */
+    private $reference;
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="produits", type="array")
+     */
+    private $products;
+
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}
+

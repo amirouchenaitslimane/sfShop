@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+{% block title %} Pedidos {% endblock %}
+ {% block category %}{% endblock %}
+{% block slider %}{% endblock %}
+{% block body %}
+
+ <div class="col-sm-9 padding-right">
+  <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+   <div class="panel panel-default">
+    <div class="panel-heading">
+     <h4 class="panel-title">
+      <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+       <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+      Mis Pedidos
+      </a>
+     </h4>
+    </div>
+    <div id="sportswear" class="panel-collapse collapse">
+     <div class="panel-body">
+      <ul>
+       <li><a href="#">Nike </a></li>
+       <hr>
+       <li>
+        <a href=""   class="btn btn-default add-to-cart" >Descargar</a>
+        <a type="button" class="btn btn-default add-to-cart"  data-toggle="modal" data-target="#myModal">Detalle de mi Pedido</a>
+
+       </li>
+      </ul>
+     </div>
+    </div>
+   </div>
+
+
+
+  </div><!--/category-products-->
+
+ </div>
+ <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+     <h4 class="modal-title" id="myModalLabel">Mis Pedidos</h4>
+    </div>
+    <div class="modal-body">
+     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, suscipit, unde. Accusantium, debitis deleniti dolor, eaque eligendi incidunt molestiae nam natus nesciunt nihil nisi placeat possimus provident quaerat quidem repudiandae!</p>
+    </div>
+
+   </div>
+  </div>
+ </div>
+
+
+{% endblock %}

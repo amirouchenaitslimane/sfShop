@@ -1,0 +1,75 @@
+am_express_homepage:
+    path:     /
+    defaults: { _controller: AMExpressBundle:Default:index }
+am_express_search:
+    path:     /search
+    defaults: { _controller: AMCoreBundle:Core:search }
+
+
+am_express_product:
+    path:     /product
+    defaults: { _controller: AMExpressBundle:Catalog:listAll }
+
+am_express_product_show:
+    path:     /show-{id}
+    defaults:
+        _controller: AMExpressBundle:Catalog:show
+    requirements:
+        id:   \d+
+
+am_express_category_show:
+    path:     /category-{id}
+    defaults:
+        _controller: AMExpressBundle:Category:show
+    requirements:
+        id:   \d+
+
+
+am_express_cart:
+    path:     /cart
+    defaults: { _controller: AMExpressBundle:Cart:index }
+
+
+am_express_cart_add:
+    path:     /add-to-cart/{id}
+    defaults:
+        _controller: AMExpressBundle:Cart:add
+    requirements:
+        id:   \d+
+
+
+am_express_update:
+    path: /update
+    defaults:
+        _controller: AMExpressBundle:Cart:update
+
+am_express_cart_delete:
+    path: /delete-cart
+    defaults:
+        _controller: AMExpressBundle:Cart:delete
+
+am_express_teste:
+    path: /teste
+    defaults:
+        _controller: AMExpressBundle:Default:getproduct
+
+am_express_pay:
+    path: /pedido-{amount}
+    defaults:
+        _controller: AMExpressBundle:Pay:index
+    requirements:
+        id:   \d+
+
+
+am_express_command:
+    path:     /command
+    defaults: { _controller: AMExpressBundle:Command:index }
+
+
+am_pay_paiement:
+    path:     /paiement
+    defaults: { _controller: AMExpressBundle:Pay:paiement }
+
+am_pay_cancel:
+    path:     /cancel
+    defaults: { _controller: AMExpressBundle:Pay:cancel }

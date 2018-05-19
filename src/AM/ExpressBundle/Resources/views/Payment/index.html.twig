@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block title %} Productos {% endblock %}
+{% block body %}
+    {% block slider %}{% endblock %}
+    Tota a pagar : {{ amount }}
+
+    <a href="{{ path('am_pay_paiement') }}" class=" btn btn-info">Pagar</a>
+
+
+{% endblock %}

@@ -1,0 +1,4 @@
+services:
+    am_express.Transactioncart:
+        class: AM\ExpressBundle\Payment\TransactionCart
+ #        arguments: ["@service_id", "plain_value", "%parameter%"]

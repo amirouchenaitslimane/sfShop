@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{% block title %}{% endblock %} | AM-Shopper</title>
+
+    <!--hojas de estilo-->
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/prettyPhoto.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/price-range.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
+    {% block stylesheets %}{% endblock %}
+
+    <!--fin hojas de estilo-->
+    <!--[if lt IE 9]>
+    <script src="{{ asset('js/html5shiv.js') }}"></script>
+    <script src="{{ asset('js/respond.min.js') }}"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="{{ asset('images/ico/favicon.ico') }}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+<body>
+<header id="header"><!--header-->
+    <div class="header_top"><!--header_top-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="contactinfo">
+                        <ul class="nav nav-pills">
+                            <li><a href="#"><i class="fa fa-phone"></i> +34 95 01 88 821</a></li>
+                            <li><a href="#"><i class="fa fa-envelope"></i> info@dominio.es</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="social-icons pull-right">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/header_top-->
+    <div class="header-middle"><!--header-middle-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="logo pull-left">
+                        <h1><a href="{{ path('am_express_homepage') }}"><span class="letra">AM</span>-SHOPPER</a></h1>
+                    </div>
+                    <div class="pull-right">
+
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="shop-menu pull-right">
+                        <ul class="nav navbar-nav">
+
+                            {% if is_granted("ROLE_ADMIN") %}
+                                <li><a href="">Dashboard</a></li>
+                            {% endif %}
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                <li> <a href="{{ path('fos_user_security_logout') }}"> <i class="fa fa-user"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+                                <li><a href="#"><i class="fa fa-user"></i> Mi cuenta</a></li>
+                            {% else %}
+                                <li> <a href="{{ path('fos_user_security_login') }}"> <i class="fa fa-user"></i> {{ 'layout.login'|trans({}, 'FOSUserBundle') }}  </a></li>
+
+                                <li> <a href="{{ path('fos_user_registration_register') }}"> <i class="fa fa-user"></i> {{ 'layout.register'|trans({}, 'FOSUserBundle') }}  </a></li>
+
+                            {% endif %}
+                            <li><a href="{{ path('am_express_cart') }}"><i class="fa fa-shopping-cart"></i> Cesta { {{ app.session.get('panier')|length }} } </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/header-middle-->
+    <div class="header-bottom"><!--header-bottom-->
+        <div class="container">
+            <div class="row">
+                {{ render(controller("AMExpressBundle:Default:navigation")) }}
+
+            </div>
+        </div>
+    </div><!--/header-bottom-->
+</header>
+{% block slider %}
+    <section id="slider"><!--slider-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#slider-carousel" data-slide-to="1"></li>
+                            <li data-target="#slider-carousel" data-slide-to="2"></li>
+                        </ol>
+
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <div class="col-sm-6">
+                                    <h1><span>E</span>-SHOPPER</h1>
+                                    <h2>Free E-Commerce Template</h2>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                    <button type="button" class="btn btn-default get">Get it now</button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <img src="{{ asset('images/home/girl1.jpg') }}" class="girl img-responsive" alt="" />
+                                    <img src="{{ asset('images/home/pricing.png') }}"  class="pricing" alt="" />
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="col-sm-6">
+                                    <h1><span>E</span>-SHOPPER</h1>
+                                    <h2>100% Responsive Design</h2>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                    <button type="button" class="btn btn-default get">Get it now</button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <img src="{{ asset('images/home/girl2.jpg')}}" class="girl img-responsive" alt="" />
+                                    <img src="{{ asset('images/home/pricing.png')}}"  class="pricing" alt="" />
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="col-sm-6">
+                                    <h1><span>E</span>-SHOPPER</h1>
+                                    <h2>Free Ecommerce Template</h2>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                    <button type="button" class="btn btn-default get">Get it now</button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <img src="{{ asset('images/home/girl3.jpg')}}" class="girl img-responsive" alt="" />
+                                    <img src="{{ asset('images/home/pricing.png')}}" class="pricing" alt="" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section><!--/slider-->
+{% endblock %}
+<section>
+    <div class="container">
+        <div class="row">
+          {% block category %}
+              {{ render(controller("AMExpressBundle:Category:listCategory")) }}
+
+          {% endblock %}
+
+            {% block body %}
+
+
+            {% endblock %}
+        </div>
+    </div>
+</section>
+
+
+{% block footer %}
+    <footer id="footer"><!--Footer-->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
+                    <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+                </div>
+            </div>
+        </div>
+
+    </footer><!--/Footer-->
+{% endblock %}
+
+
+
+
+<script src="{{ asset('js/jquery.js')}}"></script>
+<script src="{{ asset('js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('js/jquery.scrollUp.min.js')}}"></script>
+<script src="{{ asset('js/price-range.js')}}"></script>
+<script src="{{ asset('js/jquery.prettyPhoto.js')}}"></script>
+<script src="{{ asset('js/main.js')}}"></script>
+{% block javascripts %}{% endblock %}
+</body>
+</html>
