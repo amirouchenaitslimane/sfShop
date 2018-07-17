@@ -1,4 +1,4 @@
-# sfShop
+# sfShop - sistema de pago sin usar bundle (Symfony 3.4)
 
 Instalar la dependencias composer update
 instalar la base de datos cambiar la configuración en parameters.yml
